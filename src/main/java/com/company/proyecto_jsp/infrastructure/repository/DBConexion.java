@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBConeccion {
+public class DBConexion {
 
     private static final String DB_USER = System.getenv("DB_USER");
     private static final String DB_HOST = System.getenv("DB_HOST");
@@ -16,7 +16,7 @@ public class DBConeccion {
 
     private static Connection conexion;
 
-    public DBConeccion() throws SQLException {
+    public DBConexion() throws SQLException {
         iniciarConexion();
     }
 
