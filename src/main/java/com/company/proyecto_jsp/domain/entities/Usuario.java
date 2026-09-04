@@ -36,19 +36,19 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getEmail() {
+    public String getCorreo() {
         return correo;
     }
 
-    public void setEmail(String correo) {
+    public void setCorreo(String correo) {
         this.correo = correo;
     }
 
-    public String getClave() {
+    public String getPassword() {
         return password;
     }
 
-    public void setClave(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
