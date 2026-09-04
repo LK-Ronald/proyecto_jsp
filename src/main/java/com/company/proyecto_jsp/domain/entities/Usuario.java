@@ -5,17 +5,17 @@ import com.company.proyecto_jsp.domain.enums.Rol;
 public class Usuario {
     private String id;
     private String nombre;
-    private String email;
+    private String correo;
     private String clave;
     private Rol rol;
 
     public Usuario() {
     }
 
-    public Usuario(String id, String nombre, String email, String clave, Rol rol) {
+    public Usuario(String id, String nombre, String correo, String clave, Rol rol) {
         this.id = id;
         this.nombre = nombre;
-        this.email = email;
+        this.correo = correo;
         this.clave = clave;
         this.rol = rol;
     }
@@ -37,11 +37,11 @@ public class Usuario {
     }
 
     public String getEmail() {
-        return email;
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String correo) {
+        this.correo = correo;
     }
 
     public String getClave() {
