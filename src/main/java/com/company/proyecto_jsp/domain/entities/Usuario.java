@@ -6,17 +6,17 @@ public class Usuario {
     private String id;
     private String nombre;
     private String correo;
-    private String clave;
+    private String password;
     private Rol rol;
 
     public Usuario() {
     }
 
-    public Usuario(String id, String nombre, String correo, String clave, Rol rol) {
+    public Usuario(String id, String nombre, String correo, String password, Rol rol) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
-        this.clave = clave;
+        this.password = password;
         this.rol = rol;
     }
 
@@ -45,11 +45,11 @@ public class Usuario {
     }
 
     public String getClave() {
-        return clave;
+        return password;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setClave(String password) {
+        this.password = password;
     }
 
     public Rol getRol() {
