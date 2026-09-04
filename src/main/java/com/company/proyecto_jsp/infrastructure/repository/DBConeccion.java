@@ -14,11 +14,16 @@ public class DBConeccion {
     private static final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
     private static final String DRIVER = "com.postgresql.Driver";
 
-    public static Connection getConnection() throws SQLException {
-        Connection connection = null;
+    private static Connection conexion;
+
+    public DBConeccion() throws SQLException {
+        iniciarConexion();
+    }
+
+    private static void iniciarConexion() throws SQLException {
         try {
             Class.forName(DRIVER);
-            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            conexion = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             throw new SQLException("Error: Driver PostgreSQL no encontrado.");
@@ -26,6 +31,13 @@ public class DBConeccion {
             String mensaje = "Error: No se pudo establecer la conexion con la base de datos.";
             throw new SQLException(mensaje);
         }
-        return connection;
+    }
+
+    public static Connection getConexion() throws SQLException {
+        if (conexion == null) {
+            iniciarConexion();
+            return conexion;
+        }
+        return conexion;
     }
 }
