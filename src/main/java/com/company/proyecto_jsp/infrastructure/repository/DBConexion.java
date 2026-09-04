@@ -44,6 +44,7 @@ public class DBConexion {
     public static void closeConnection() throws SQLException {
         if (conexion != null) {
             conexion.close();
+            conexion = null;
         }
     }
 }
