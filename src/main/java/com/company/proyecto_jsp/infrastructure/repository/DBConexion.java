@@ -12,7 +12,7 @@ public class DBConexion {
     private static final String DB_PASS = System.getenv("DB_PASS");
     private static final String DB_PORT = System.getenv("DB_PORT");
     private static final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
-    private static final String DRIVER = "com.postgresql.Driver";
+    private static final String DRIVER = "org.postgresql.Driver";
 
     private static Connection conexion;
 
