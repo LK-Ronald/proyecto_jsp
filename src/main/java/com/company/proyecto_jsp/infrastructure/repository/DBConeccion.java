@@ -40,4 +40,10 @@ public class DBConeccion {
         }
         return conexion;
     }
+
+    public static void closeConnection() throws SQLException {
+        if (conexion != null) {
+            conexion.close();
+        }
+    }
 }
