@@ -34,7 +34,7 @@ public class DBConexion {
     }
 
     public static Connection getConexion() throws SQLException {
-        if (conexion == null) {
+        if (conexion == null || conexion.isClosed()) {
             iniciarConexion();
             return conexion;
         }
@@ -42,9 +42,8 @@ public class DBConexion {
     }
 
     public static void closeConnection() throws SQLException {
-        if (conexion != null) {
+        if (!conexion.isClosed()) {
             conexion.close();
-            conexion = null;
         }
     }
 }
