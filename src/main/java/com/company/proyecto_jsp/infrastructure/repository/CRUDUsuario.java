@@ -31,7 +31,7 @@ public class CRUDUsuario implements UsuarioRepository {
             statement.executeUpdate();
         } catch (SQLException e) {
             if ("23505".equals(e.getSQLState())) {
-                throw new Exception("El usuario con el codigo " + usuario.getId() + " ya existe");
+                throw new Exception("El usuario con el codigo " + usuario.getId() + " o correo " + usuario.getCorreo() + " ya existe");
             } else {
                 throw e;
             }
