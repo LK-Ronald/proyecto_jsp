@@ -112,6 +112,8 @@ public class CRUDUsuario implements UsuarioRepository {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            DBConexion.closeConnection();
         }
         return usuario;
     }
@@ -127,6 +129,8 @@ public class CRUDUsuario implements UsuarioRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            DBConexion.closeConnection();
         }
         return usuarios;
     }
