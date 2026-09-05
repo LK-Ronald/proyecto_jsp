@@ -1,6 +1,7 @@
 package com.company.proyecto_jsp.controllers;
 
 import com.company.proyecto_jsp.domain.entities.Usuario;
+import com.company.proyecto_jsp.domain.enums.Rol;
 import com.company.proyecto_jsp.infrastructure.repository.CRUDUsuario;
 import com.company.proyecto_jsp.infrastructure.services.UsuarioService;
 import jakarta.servlet.ServletException;
@@ -35,7 +36,10 @@ public class ServletUsuario extends HttpServlet {
 
         switch (accion) {
             case "login":
-                processLogin(request, response, service, contextPath);
+                    processLogin(request, response, service, contextPath);
+                break;
+            case "agregar":
+                processAgregar(request, response, service, contextPath);
                 break;
             default:
                 response.sendRedirect(contextPath + "/index.jsp");
@@ -54,6 +58,23 @@ public class ServletUsuario extends HttpServlet {
         } catch (Exception e) {
             String mensaje = e.getMessage();
             response.sendRedirect(contextPath + "/web/mensaje.jsp?mensaje=" + mensaje);
+        }
+    }
+
+    private void processAgregar(HttpServletRequest request, HttpServletResponse response, UsuarioService service, String contextPath) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        String nombre = request.getParameter("nombre");
+        String correo = request.getParameter("correo");
+        String password = request.getParameter("password");
+        String rol = request.getParameter("rol");
+        try {
+            Usuario usuario = new Usuario(id, nombre, correo, password, Rol.fromString(rol));
+            service.addUsuario(usuario);
+            String mensaje = "Usuario agregado con exito";
+            response.sendRedirect(contextPath + "/web/usuario/agregar.jsp?mensaje=" + mensaje);
+        } catch (Exception e) {
+            String mensaje = e.getMessage();
+            response.sendRedirect(contextPath + "/web/usuario/agregar.jsp?mensaje=" + mensaje);
         }
     }
 }
