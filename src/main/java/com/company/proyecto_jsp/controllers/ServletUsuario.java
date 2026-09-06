@@ -36,10 +36,13 @@ public class ServletUsuario extends HttpServlet {
 
         switch (accion) {
             case "login":
-                    processLogin(request, response, service, contextPath);
+                processLogin(request, response, service, contextPath);
                 break;
             case "agregar":
                 processAgregar(request, response, service, contextPath);
+                break;
+            case "buscar_editar_eliminar":
+                processBuscarEditarEliminar(request, response, service, contextPath);
                 break;
             default:
                 response.sendRedirect(contextPath + "/index.jsp");
@@ -75,6 +78,17 @@ public class ServletUsuario extends HttpServlet {
         } catch (Exception e) {
             String mensaje = e.getMessage();
             response.sendRedirect(contextPath + "/web/usuario/agregar.jsp?mensaje=" + mensaje);
+        }
+    }
+
+    private void processBuscarEditarEliminar(HttpServletRequest request, HttpServletResponse response, UsuarioService service, String contextPath) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        try {
+            Usuario usuario = service.getUsuarioById(id);
+            request.setAttribute("usuario.buscar", usuario);
+            request.getRequestDispatcher("/web/usuario/buscar_editar_eliminar.jsp").forward(request, response);
+        } catch (Exception e) {
+            response.sendRedirect(contextPath + "/web/usuario/buscar_editar_eliminar.jsp?mensaje=" + e.getMessage());
         }
     }
 }
