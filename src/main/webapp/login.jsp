@@ -10,10 +10,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Seccion</title>
+    <title>Iniciar Sesión</title>
 </head>
 <body>
-<h1 style="text-align: center; color: green">Iniciar Seccion</h1>
+<h1 style="text-align: center; color: green">Iniciar Sesión</h1>
 <center>
     <form action="${pageContext.request.contextPath}/usuario?accion=login" method="post">
         <table style="margin: auto">
@@ -27,7 +27,7 @@
             </tr>
             <tr>
                 <td align="center" colspan="2" style="padding-top: 10px">
-                    <input type="submit" value="Iniciar Seccion">
+                    <input type="submit" value="Iniciar Sesión">
                     <input type="reset" value="Limpiar">
                 </td>
             </tr>
