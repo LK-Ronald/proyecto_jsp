@@ -24,8 +24,7 @@
             </tr>
             <tr>
                 <td>&bull;<a
-                        href="${pageContext.request.contextPath}/web/usuario/buscar_editar_eliminar.jsp">Buscar, Editar
-                    o Eliminar Usuario</a>
+                        href="${pageContext.request.contextPath}/web/usuario/buscar_eliminar.jsp">Buscar o Eliminar Usuario</a>
                 </td>
             </tr>
             <tr>
