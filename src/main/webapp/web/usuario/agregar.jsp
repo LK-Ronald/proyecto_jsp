@@ -14,7 +14,7 @@
 <center>
     <h1 style="color: green; text-align: center">Agregar Usuario</h1>
     <hr>
-    <form action="${pageContext.request.contextPath}/usuario?accion=agregar" method="post">
+    <form action="${pageContext.request.contextPath}/usuario?accion=agregar_usuario" method="post">
         <table>
             <tr>
                 <th style="text-align: right">ID:</th>
@@ -43,8 +43,8 @@
             </tr>
 
             <tr>
-                <td><input type="submit" name="Agregar"></td>
-                <td><input type="reset" name="Limpiar"></td>
+                <td><input type="submit" value="Agregar Usuario"></td>
+                <td><input type="reset" value="Limpiar"></td>
             </tr>
         </table>
     </form>

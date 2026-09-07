@@ -10,13 +10,13 @@
 
 <html>
 <head>
-    <title>Buscar, Editar o Eliminar Usuario</title>
+    <title>Buscar y Eliminar Usuario</title>
 </head>
 <body>
 <center>
-    <h1 style="text-align: center; color: green">Buscar, Editar o Eliminar Usuario</h1>
+    <h1 style="text-align: center; color: green">Buscar o Eliminar Usuario</h1>
     <hr>
-    <form action="${pageContext.request.contextPath}/usuario?accion=buscar_editar_eliminar" method="post">
+    <form action="${pageContext.request.contextPath}/usuario?accion=buscar_usuario" method="post">
         <table>
             <tr>
                 <th style="text-align: right">ID:</th>
@@ -60,6 +60,18 @@
                 <tr>
                     <th style="text-align: right">Rol:</th>
                     <td>${requestScope['usuario.buscar'].rol}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="${pageContext.request.contextPath}/usuario?accion=cargar_editar_usuario&id=${requestScope['usuario.buscar'].id}"
+                              method="post">
+                            <button type="submit">Editar Usuario</button>
+                            <button type="submit"
+                                    formaction="${pageContext.request.contextPath}/usuario?accion=eliminar_usuario&id=${requestScope['usuario.buscar'].id}">
+                                Eliminar Usuario
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             </table>
             <hr>
