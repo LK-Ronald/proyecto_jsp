@@ -38,15 +38,23 @@ public class ServletUsuario extends HttpServlet {
             case "login":
                 processLogin(request, response, service, contextPath);
                 break;
-            case "agregar":
-                processAgregar(request, response, service, contextPath);
+            case "agregar_usuario":
+                processAgregarUsuario(request, response, service, contextPath);
                 break;
-            case "buscar_editar_eliminar":
-                processBuscarEditarEliminar(request, response, service, contextPath);
+            case "buscar_usuario":
+                processBuscarUsuario(request, response, service, contextPath);
+                break;
+            case "cargar_editar_usuario":
+                processCargarUsuarioParaEditar(request, response, service, contextPath);
+                break;
+            case "actualizar_usuario":
+                processActualizarUsuario(request, response, service, contextPath);
+                break;
+            case "eliminar_usuario":
+                processEliminarUsuario(request, response, service, contextPath);
                 break;
             default:
                 response.sendRedirect(contextPath + "/index.jsp");
-                return;
         }
     }
 
@@ -64,7 +72,7 @@ public class ServletUsuario extends HttpServlet {
         }
     }
 
-    private void processAgregar(HttpServletRequest request, HttpServletResponse response, UsuarioService service, String contextPath) throws ServletException, IOException {
+    private void processAgregarUsuario(HttpServletRequest request, HttpServletResponse response, UsuarioService service, String contextPath) throws ServletException, IOException {
         String id = request.getParameter("id");
         String nombre = request.getParameter("nombre");
         String correo = request.getParameter("correo");
@@ -81,14 +89,66 @@ public class ServletUsuario extends HttpServlet {
         }
     }
 
-    private void processBuscarEditarEliminar(HttpServletRequest request, HttpServletResponse response, UsuarioService service, String contextPath) throws ServletException, IOException {
+    private void processBuscarUsuario(HttpServletRequest request, HttpServletResponse response, UsuarioService service, String contextPath) throws ServletException, IOException {
         String id = request.getParameter("id");
         try {
             Usuario usuario = service.getUsuarioById(id);
             request.setAttribute("usuario.buscar", usuario);
-            request.getRequestDispatcher("/web/usuario/buscar_editar_eliminar.jsp").forward(request, response);
+            request.getRequestDispatcher("/web/usuario/buscar_eliminar.jsp").forward(request, response);
         } catch (Exception e) {
-            response.sendRedirect(contextPath + "/web/usuario/buscar_editar_eliminar.jsp?mensaje=" + e.getMessage());
+            response.sendRedirect(contextPath + "/web/usuario/buscar_eliminar.jsp?mensaje=" + e.getMessage());
+        }
+    }
+
+    private void processCargarUsuarioParaEditar(HttpServletRequest request, HttpServletResponse response, UsuarioService service, String contextPath) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        try {
+            Usuario usuario = service.getUsuarioById(id);
+            request.setAttribute("usuario.editar", usuario);
+            request.getRequestDispatcher("/web/usuario/actualizar.jsp").forward(request, response);
+        } catch (Exception e) {
+            response.sendRedirect(contextPath + "/web/usuario/buscar_eliminar.jsp?mensaje=" + e.getMessage());
+        }
+    }
+
+    private void processActualizarUsuario(HttpServletRequest request, HttpServletResponse response, UsuarioService service, String contextPath) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        String nombre = request.getParameter("nombre");
+        String correo = request.getParameter("correo");
+        String new_password = request.getParameter("new_password");
+        String rol = request.getParameter("rol");
+        try {
+            Usuario usuario_act;
+            Usuario usuario = service.getUsuarioById(id);
+            if (new_password == null || new_password.trim().isEmpty()) {
+                usuario_act = new Usuario(id, nombre, correo, usuario.getPassword(), Rol.fromString(rol));
+            } else {
+                usuario_act = new Usuario(id, nombre, correo, new_password, Rol.fromString(rol));
+            }
+            service.updateUsuario(usuario_act);
+            String mensaje = "Usuario actualizado con exito";
+            response.sendRedirect(contextPath + "/web/usuario/buscar_eliminar.jsp?mensaje=" + mensaje);
+        } catch (Exception e) {
+            try {
+                request.setAttribute("usuario.editar", new Usuario(id, nombre, correo, new_password, Rol.fromString(rol)));
+            } catch (Exception ex) {
+                String mensaje = e.getMessage();
+                response.sendRedirect(contextPath + "/web/usuario/actualizar.jsp?mensaje=" + mensaje);
+            }
+            String mensaje = e.getMessage();
+            response.sendRedirect(contextPath + "/web/usuario/actualizar.jsp?mensaje=" + mensaje);
+        }
+    }
+
+    private void processEliminarUsuario(HttpServletRequest request, HttpServletResponse response, UsuarioService service, String contextPath) throws IOException {
+        String id = request.getParameter("id");
+        try {
+            service.deleteUsuario(id);
+            String mensaje = "Usuario eliminado con exito";
+            response.sendRedirect(contextPath + "/web/usuario/buscar_eliminar.jsp?mensaje=" + mensaje);
+        } catch (Exception e) {
+            String mensaje = e.getMessage();
+            response.sendRedirect(contextPath + "/web/usuario/buscar_eliminar.jsp?mensaje=" + mensaje);
         }
     }
 }
