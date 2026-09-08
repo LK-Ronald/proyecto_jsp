@@ -14,6 +14,7 @@
 <c:choose>
     <c:when test="${empty sessionScope.usuario}">
         <p>No has iniciado sesion</p>
+        <a href="${pageContext.request.contextPath}/login.jsp">Iniciar Sesion</a>
     </c:when>
 
     <c:otherwise>
@@ -24,16 +25,20 @@
             </tr>
             <tr>
                 <td>&bull;<a
-                        href="${pageContext.request.contextPath}/web/usuario/buscar_eliminar.jsp">Buscar o Eliminar Usuario</a>
+                        href="${pageContext.request.contextPath}/web/usuario/buscar_eliminar.jsp">Buscar o Eliminar
+                    Usuario</a>
                 </td>
             </tr>
             <tr>
-                <td>&bull;<a href="${pageContext.request.contextPath}/usuario?accion=listar_usuarios">Listar Usuario</a></td>
+                <td>&bull;<a href="${pageContext.request.contextPath}/usuario?accion=listar_usuarios">Listar Usuario</a>
+                </td>
+            </tr>
+            <tr>
+                <td>&bull;<a href="${pageContext.request.contextPath}/usuario?accion=logout" style="color: crimson">Cerrar
+                    Sesion</a></td>
             </tr>
         </table>
     </c:otherwise>
 </c:choose>
-
-<a href="${pageContext.request.contextPath}/login.jsp">Iniciar Sesion</a>
 </body>
 </html>

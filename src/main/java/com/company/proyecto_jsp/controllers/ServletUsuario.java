@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,7 +30,10 @@ public class ServletUsuario extends HttpServlet {
         }
 
         if ("listar_usuarios".equals(accion)) {
+            validateSesion(request, response);
             processListarUsuarios(request, response, contextPath);
+        } else if ("logout".equals(accion)) {
+            processLogout(request, response, contextPath);
         } else {
             response.sendRedirect(contextPath + "/index.jsp");
         }
@@ -85,6 +89,7 @@ public class ServletUsuario extends HttpServlet {
     }
 
     private void processAgregarUsuario(HttpServletRequest request, HttpServletResponse response, String contextPath) throws ServletException, IOException {
+        validateSesion(request, response);
         String id = request.getParameter("id");
         String nombre = request.getParameter("nombre");
         String correo = request.getParameter("correo");
@@ -102,6 +107,7 @@ public class ServletUsuario extends HttpServlet {
     }
 
     private void processBuscarUsuario(HttpServletRequest request, HttpServletResponse response, String contextPath) throws ServletException, IOException {
+        validateSesion(request, response);
         String id = request.getParameter("id");
         try {
             Usuario usuario = SERVICE.getUsuarioById(id);
@@ -113,6 +119,7 @@ public class ServletUsuario extends HttpServlet {
     }
 
     private void processCargarUsuarioParaEditar(HttpServletRequest request, HttpServletResponse response, String contextPath) throws ServletException, IOException {
+        validateSesion(request, response);
         String id = request.getParameter("id");
         try {
             Usuario usuario = SERVICE.getUsuarioById(id);
@@ -124,6 +131,7 @@ public class ServletUsuario extends HttpServlet {
     }
 
     private void processActualizarUsuario(HttpServletRequest request, HttpServletResponse response, String contextPath) throws ServletException, IOException {
+        validateSesion(request, response);
         String id = request.getParameter("id");
         String nombre = request.getParameter("nombre");
         String correo = request.getParameter("correo");
@@ -165,6 +173,7 @@ public class ServletUsuario extends HttpServlet {
     }
 
     private void processListarUsuarios(HttpServletRequest request, HttpServletResponse response, String contextPath) throws ServletException, IOException {
+        validateSesion(request, response);
         try {
             List<Usuario> usuarios = SERVICE.getAllUsuarios();
             request.setAttribute("usuarios", usuarios);
@@ -172,5 +181,21 @@ public class ServletUsuario extends HttpServlet {
             response.sendRedirect(contextPath + "/web/mensaje.jsp?mensaje=" + e.getMessage());
         }
         request.getRequestDispatcher("/web/usuario/listar.jsp").forward(request, response);
+    }
+
+    private void processLogout(HttpServletRequest request, HttpServletResponse response, String contextPath) throws ServletException, IOException {
+        request.getSession().invalidate();
+        response.sendRedirect(contextPath + "/index.jsp");
+    }
+
+    private void validateSesion(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+
+        boolean isAuthenticated = (session != null && session.getAttribute("usuario") != null);
+
+        if (!isAuthenticated) {
+            String loginUrl = request.getContextPath() + "/login.jsp";
+            response.sendRedirect(loginUrl);
+        }
     }
 }
