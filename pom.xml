@@ -6,7 +6,7 @@
 
     <groupId>com.company</groupId>
     <artifactId>proyecto_jsp</artifactId>
-    <version>1.7.0</version>
+    <version>1.7.1</version>
     <name>proyecto_jsp</name>
     <packaging>war</packaging>
 
