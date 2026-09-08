@@ -28,7 +28,7 @@
                 </td>
             </tr>
             <tr>
-                <td>&bull;<a href="${pageContext.request.contextPath}/web/usuario/listar.jsp">Listar Usuario</a></td>
+                <td>&bull;<a href="${pageContext.request.contextPath}/usuario?accion=listar_usuarios">Listar Usuario</a></td>
             </tr>
         </table>
     </c:otherwise>
