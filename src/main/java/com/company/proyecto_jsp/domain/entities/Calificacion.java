@@ -1,10 +1,10 @@
 package com.company.proyecto_jsp.domain.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Calificacion {
     private int cid;
-    private Date fecha;
+    private LocalDate fecha;
     private String estudiante;
     private String docente;
     private String asignatura;
@@ -20,7 +20,7 @@ public class Calificacion {
 
     public Calificacion(
             int cid,
-            Date fecha,
+            LocalDate fecha,
             String estudiante,
             String docente,
             String asignatura,
@@ -30,7 +30,7 @@ public class Calificacion {
             String actividadEvaluada,
             double porcentaje, double nota) {
         this.cid = cid;
-        this.fecha = fecha;
+        this.fecha = LocalDate.now();
         this.estudiante = estudiante;
         this.docente = docente;
         this.asignatura = asignatura;
@@ -46,7 +46,7 @@ public class Calificacion {
         return cid;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 

@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,7 +113,7 @@ public class CRUDCalificacion implements CalificacionRepository {
     private Calificacion mapResultSetToCalificacion(ResultSet rs) throws SQLException {
         return new Calificacion(
                 rs.getInt("cid"),
-                rs.getDate("fecha"),
+                rs.getObject("fecha", LocalDate.class),
                 rs.getString("estudiante"),
                 rs.getString("docente"),
                 rs.getString("asignatura"),
