@@ -21,6 +21,9 @@
         <p>${param.mensaje}</p>
         <table border="0">
             <tr>
+                <th style="text-align: left; color: green">Usuarios</th>
+            </tr>
+            <tr>
                 <td>&bull;<a href="${pageContext.request.contextPath}/web/usuario/agregar.jsp">Agregar Usuario</a></td>
             </tr>
             <tr>
@@ -34,7 +37,23 @@
                 </td>
             </tr>
             <tr>
-                <td>&bull;<a href="${pageContext.request.contextPath}/usuario?accion=logout" style="color: crimson">Cerrar
+                <th style="text-align: left; color: green">Calificaciones</th>
+            </tr>
+            <tr>
+                <td>&bull;<a href="${pageContext.request.contextPath}/web/calificacion/agregar.jsp">Agregar Calificacion</a></td>
+            </tr>
+            <tr>
+                <td>&bull;<a
+                        href="${pageContext.request.contextPath}/web/calificacion/buscar_eliminar.jsp">Buscar o Eliminar
+                    Calificacion</a>
+                </td>
+            </tr>
+            <tr>
+                <td>&bull;<a href="${pageContext.request.contextPath}/calificacion?accion=listar_calificaciones">Listar Calificaciones</a>
+                </td>
+            </tr>
+            <tr>
+                <td><br>&bull;<a href="${pageContext.request.contextPath}/usuario?accion=logout" style="color: crimson">Cerrar
                     Sesion</a></td>
             </tr>
         </table>
