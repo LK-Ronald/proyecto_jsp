@@ -11,8 +11,8 @@ import java.util.List;
 
 public class CRUDCalificacion implements CalificacionRepository {
     private final String TB_NOMBRE = "tb_calificaciones";
-    private final String SQL_INSERT = "INSERT INTO " + TB_NOMBRE + " (fecha, estudiante, docente, asignatura, carrera, universidad, periodo, actividadEvaluada, porcentaje, nota) VALUES (CURRENT_TIMESTAMP, ?, ?,?,?,?,?,?,?,?)";
-    private final String SQL_UPDATE = "UPDATE " + TB_NOMBRE + " SET estudiante=?, docente=?, asignatura=?, carrera=?, universidad=?, periodo=?, actividadEvaluada=?, porcentaje=?, nota=? WHERE cid=?";
+    private final String SQL_INSERT = "INSERT INTO " + TB_NOMBRE + " (fecha, estudiante, docente, asignatura, carrera, universidad, periodo, actividadEvaluada, nota) VALUES (CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String SQL_UPDATE = "UPDATE " + TB_NOMBRE + " SET estudiante=?, docente=?, asignatura=?, carrera=?, universidad=?, periodo=?, actividadEvaluada=?, nota=? WHERE cid=?";
     private final String SQL_DELETE = "DELETE FROM " + TB_NOMBRE + " WHERE cid = ?";
     private final String SQL_SELECT_ID = "SELECT * FROM " + TB_NOMBRE + " WHERE cid = ?";
     private final String SQL_SELECT_ALL = "SELECT * FROM " + TB_NOMBRE;
@@ -28,8 +28,7 @@ public class CRUDCalificacion implements CalificacionRepository {
             statement.setString(5, calificacion.getUniversidad());
             statement.setString(6, calificacion.getPeriodo());
             statement.setString(7, calificacion.getActividadEvaluada());
-            statement.setDouble(8, calificacion.getPorcentaje());
-            statement.setDouble(9, calificacion.getNota());
+            statement.setDouble(8, calificacion.getNota());
             statement.executeUpdate();
         } catch (Exception e) {
             throw new Exception("Error en la db al insertar la calificacion");
@@ -60,9 +59,8 @@ public class CRUDCalificacion implements CalificacionRepository {
             statement.setString(5, calificacion.getUniversidad());
             statement.setString(6, calificacion.getPeriodo());
             statement.setString(7, calificacion.getActividadEvaluada());
-            statement.setDouble(8, calificacion.getPorcentaje());
-            statement.setDouble(9, calificacion.getNota());
-            statement.setInt(10, calificacion.getCid());
+            statement.setDouble(8, calificacion.getNota());
+            statement.setInt(9, calificacion.getCid());
             int resultSet = statement.executeUpdate();
             if (resultSet == 0) {
                 throw new Exception("No se encontro la calificacion con el id " + calificacion.getCid());
@@ -119,7 +117,6 @@ public class CRUDCalificacion implements CalificacionRepository {
                 rs.getString("universidad"),
                 rs.getString("periodo"),
                 rs.getString("actividadEvaluada"),
-                rs.getDouble("porcentaje"),
                 rs.getDouble("nota")
         );
     }

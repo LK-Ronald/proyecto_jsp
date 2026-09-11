@@ -12,7 +12,6 @@ public class Calificacion {
     private String universidad;
     private String periodo;
     private String actividadEvaluada;
-    private double porcentaje;
     private double nota;
 
     public Calificacion() {
@@ -27,7 +26,7 @@ public class Calificacion {
             String universidad,
             String periodo,
             String actividadEvaluada,
-            double porcentaje, double nota) {
+            double nota) {
         this.cid = cid;
         this.fecha = LocalDate.now();
         this.estudiante = estudiante;
@@ -37,7 +36,6 @@ public class Calificacion {
         this.universidad = universidad;
         this.periodo = periodo;
         this.actividadEvaluada = actividadEvaluada;
-        this.porcentaje = porcentaje;
         this.nota = nota;
     }
 
@@ -75,10 +73,6 @@ public class Calificacion {
 
     public String getActividadEvaluada() {
         return actividadEvaluada;
-    }
-
-    public double getPorcentaje() {
-        return porcentaje;
     }
 
     public double getNota() {
