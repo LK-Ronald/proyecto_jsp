@@ -20,7 +20,6 @@ public class Calificacion {
 
     public Calificacion(
             int cid,
-            LocalDate fecha,
             String estudiante,
             String docente,
             String asignatura,
