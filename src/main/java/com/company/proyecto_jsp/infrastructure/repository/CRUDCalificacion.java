@@ -12,7 +12,7 @@ import java.util.List;
 public class CRUDCalificacion implements CalificacionRepository {
     private final String TB_NOMBRE = "tb_calificaciones";
     private final String SQL_INSERT = "INSERT INTO " + TB_NOMBRE + " (fecha, estudiante, docente, asignatura, carrera, universidad, periodo, actividadEvaluada, porcentaje, nota) VALUES (CURRENT_TIMESTAMP, ?, ?,?,?,?,?,?,?,?)";
-    private final String SQL_UPDATE = "UPDATE " + TB_NOMBRE + " SET  estudiante=?, docente=?, asignatura=?, carrera=?, universidad=?, periodo=?, actividadEvaluada=?, porcentaje=?, nota=? WHERE cid=?";
+    private final String SQL_UPDATE = "UPDATE " + TB_NOMBRE + " SET estudiante=?, docente=?, asignatura=?, carrera=?, universidad=?, periodo=?, actividadEvaluada=?, porcentaje=?, nota=? WHERE cid=?";
     private final String SQL_DELETE = "DELETE FROM " + TB_NOMBRE + " WHERE cid = ?";
     private final String SQL_SELECT_ID = "SELECT * FROM " + TB_NOMBRE + " WHERE cid = ?";
     private final String SQL_SELECT_ALL = "SELECT * FROM " + TB_NOMBRE;
@@ -62,7 +62,7 @@ public class CRUDCalificacion implements CalificacionRepository {
             statement.setString(7, calificacion.getActividadEvaluada());
             statement.setDouble(8, calificacion.getPorcentaje());
             statement.setDouble(9, calificacion.getNota());
-            statement.setString(10, String.valueOf(calificacion.getCid()));
+            statement.setInt(10, calificacion.getCid());
             int resultSet = statement.executeUpdate();
             if (resultSet == 0) {
                 throw new Exception("No se encontro la calificacion con el id " + calificacion.getCid());
