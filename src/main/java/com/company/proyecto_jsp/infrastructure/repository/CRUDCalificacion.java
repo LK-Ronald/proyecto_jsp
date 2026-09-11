@@ -39,9 +39,9 @@ public class CRUDCalificacion implements CalificacionRepository {
     }
 
     @Override
-    public void delete(String cid) throws Exception {
+    public void delete(int cid) throws Exception {
         try (Connection conexion = DBConexion.getConexion(); PreparedStatement statement = conexion.prepareStatement(SQL_DELETE)) {
-            statement.setString(1, cid);
+            statement.setInt(1, cid);
             statement.executeUpdate();
         } catch (Exception e) {
             throw new Exception("Error en la db al eliminar la calificacion");
@@ -75,10 +75,10 @@ public class CRUDCalificacion implements CalificacionRepository {
     }
 
     @Override
-    public Calificacion getCalificacionById(String cid) throws Exception {
+    public Calificacion getCalificacionById(int cid) throws Exception {
         Calificacion calificacion = null;
         try (Connection conexion = DBConexion.getConexion(); PreparedStatement statement = conexion.prepareStatement(SQL_SELECT_ID)) {
-            statement.setString(1, cid);
+            statement.setInt(1, cid);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
                 calificacion = mapResultSetToCalificacion(result);

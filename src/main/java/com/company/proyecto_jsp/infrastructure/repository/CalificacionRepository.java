@@ -8,11 +8,11 @@ public interface CalificacionRepository {
 
     void create(final Calificacion calificacion) throws Exception;
 
-    void delete(final String cid) throws Exception;
+    void delete(final int cid) throws Exception;
 
     void update(final Calificacion calificacion) throws Exception;
 
-    Calificacion getCalificacionById(final String cid) throws Exception;
+    Calificacion getCalificacionById(final int cid) throws Exception;
 
     List<Calificacion> getAllCalificacion() throws Exception;
 
